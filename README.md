@@ -1,1 +1,2 @@
-# In this repo I am going to show two exercises using spark and spark streaming
+# Spark
+## In this repo I will show some exercises using Spark and Spark Streaming to analyze some twitter data
