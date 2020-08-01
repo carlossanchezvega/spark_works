@@ -18,7 +18,7 @@ If we launch spark without defining the port, it will connect to port 4000 if it
 ```console
  spark-shell --master yarn --conf spark.ui.port=12245
 ```
-or, to make the cluster select a port ramdomly:
+or, to let the cluster select a port randomly:
 ```console
 pyspark --master yarn --conf spark.ui.port=0
 ```
