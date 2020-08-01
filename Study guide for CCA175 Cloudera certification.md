@@ -142,6 +142,11 @@ hadoop fs -du
 
 ## Dataframe:  distributed collection with structure (RDD with structure)
 
+We will base all our example in the next data model.
+![GitHub Logo](data_model.jpg)
+Format: ![Alt Text](url)
+
+
 ### Reading data using SQLContext
 SQLContext have 2 APIs to read data of different file formats
 
