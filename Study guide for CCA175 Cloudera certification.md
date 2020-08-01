@@ -438,14 +438,6 @@ orders = sc.textFile("/public/retail_db/orders")
 
 
 # as we are trying to get the count by status, the status is the key
-ordersStatus = orders. \
-map(lambda o: (o.split(",")[3], 1))
-countByStatus = ordersStatus.countByKey()
-
-for i in countByStatus: print(i)
-ordersStatus = orders. \
-map(lambda o: (o.split(",")[3],1))
-
 >>> ordersStatus = orders. \
 ... map(lambda o: (o.split(",")[3],1))
 >>> for i in ordersStatus.take(10): print(i)
