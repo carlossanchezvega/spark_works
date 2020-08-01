@@ -144,7 +144,6 @@ hadoop fs -du
 
 We will base all our example in the next data model.
 ![GitHub Logo](data_model.jpg)
-Format: ![Alt Text](url)
 
 
 ### Reading data using SQLContext
