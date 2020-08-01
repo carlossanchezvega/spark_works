@@ -10,7 +10,7 @@ Create a directory path recursively
 ```
 
 
-###Launch spark shell
+### Launch spark shell
 ---------------
 
 If we launch spark without defining the port, it will connect to port 4000 if it is not occupied
@@ -24,21 +24,21 @@ pyspark --master yarn --conf spark.ui.port=0
 ```
 
 
-###Know the size of a directory
+### Know the size of a directory
 ---------------
 ```console
  du -sh /data/retail_db
 ```
 
 
-###List of files in a directory in the cluster
+### List of files in a directory in the cluster
 ---------------
 ```console
  hadoop fs -ls /public
 ```
 
 
-###Know the size of a hadoop directory
+### Know the size of a hadoop directory
 ---------------
 ```console
 hadoop fs -du -s -h /public
@@ -140,9 +140,9 @@ hadoop fs -du
 ```
 
 
-##Dataframe:  distributed collection with structure (RDD with structure)
+## Dataframe:  distributed collection with structure (RDD with structure)
 
-###Reading data using SQLContext
+### Reading data using SQLContext
 SQLContext have 2 APIs to read data of different file formats
 
 * load – typically takes 2 arguments, path and format
@@ -219,7 +219,7 @@ productsRDD = sc.parallelize(productsRaw)
 
 ** Dataframe:  distributed collection with structure (RDD with structure) **
 
-##Reading data using SQLContext
+## Reading data using SQLContext
 
 SQLContext have 2 APIs to read data of different file formats
 
@@ -253,7 +253,7 @@ help(mystring) -----> we will be able to access to possible methods in the data 
 
 ## Basic operations
 
-###Flatmap
+### Flatmap
 ```python
 linesList = ["How are you", "let us perform", "word count using flatMap", "to understand flatMap in detail"]
 
@@ -269,7 +269,7 @@ for i in tuples.countByKey(): print(i)
 ```
 
 
-###Filtering
+### Filtering
 ```python
 orders = sc.textFile("/public/retail_db/orders")
 ordersComplete = orders. \
@@ -278,7 +278,7 @@ filter(lambda o:
 ```
 
 
-###Joins
+### Joins
 When performing a join operation, when we are working with joins, it is better to perform the join by using integers
 
 ```python
@@ -297,7 +297,7 @@ for i in ordersJoin.take(10): print(i)
 ```
 
 
-###Outer joins
+### Outer joins
 ```python
 orders = sc.textFile("/public/retail_db/orders")
 orderItems = sc.textFile("/public/retail_db/order_items")
@@ -326,7 +326,7 @@ for i in ordersRightOuterJoinFilter.take(10): print(i)
 - Right outer join must be on the right
 - Outerjoin are usually followed by map or filter
 
-###Aggregations
+### Aggregations
 There are several APIs to perform aggregations
 
 1. Total aggregations – collect, reduce
@@ -474,7 +474,7 @@ defaultdict(<type 'int'>, {u'COMPLETE': 22899, u'PAYMENT_REVIEW': 729, u'PROCESS
 reduceByKey, groupBykey, sortByKey are transformations and the result will be a RDD. reduceByKey or aggregateByKey use a combiner but groupByKey does not use it. 
 
 
-###Aggregations - groupByKey
+### Aggregations - groupByKey
 
 1,(1 to 1000) - sum(1 to 1000) => 1+2+4+...1000 (groupByKey approach)
 1,(1 to 1000) - sum(sum(1,250) sum(251,500) sum(501,750) sum(751,1000)) ----> dividing the sum in subsets -> we will divide the execution in 4 tasks and then, we will compute the total. Is is faster as it uses more resources to compute in paralell (reduceByKey or aggregateByKey approach. This is thanks to the use of the combiner)
@@ -636,7 +636,7 @@ orderItems= sc.textFile.read('/public/retail_db/order_items')
 As we can see above, there are three records associated with each key. If we take a look to the sorted function we can see:
 Help on built-in function sorted in module __builtin__:
 
-###Help
+### Help
 
 ```console
 sorted(...)
@@ -691,7 +691,7 @@ If we would like to print each order individually, we should use flatmap instead
 19,8,1014,4,199.92,49.98
 17,8,365,3,179.97,59.99
 ```
-###reduceByKey
+### reduceByKey
 It is used for perfoming aggregations
 
 When we read the documentation we can see:
@@ -805,7 +805,7 @@ map(lambda oi: (int(oi.split(",")[1]), oi))
 ```
 
 
-###aggregateByKey
+### aggregateByKey
 
 We use it when intermediate and final values are different
 
@@ -894,7 +894,7 @@ aggregateByKey((0.0, 0),
 (20, (879.8599999999999, 4))
 (24, (829.97, 5))
 ```
-###sortByKey
+### sortByKey
 **Problem**
 Sort data by product price - sortByKey
 ```python
@@ -1033,7 +1033,7 @@ As we don't want the key (2, -59.98), we have to get the elements in each tuple 
 17,2,Under Armour Men's Highlight MC Football Clea,,129.99,http://images.acmesports.sports/Under+Armour+Men%27s+Highlight+MC+Football+Cleat
 ```
 
-###Ranking
+### Ranking
 We can use take or takeOrdered methods 
 
 **Problem**
@@ -1084,7 +1084,7 @@ take(5): print(i)
 ```
 
 
-###takeOrdered
+### takeOrdered
 Get the data in descending order
 ```python
 products = sc.textFile("/public/retail_db/products")
@@ -1116,7 +1116,7 @@ topNProducts = productsFiltered.top(5, key=lambda k: float(k.split(",")[4]))
 1048,47,"Spalding Beast 60"" Glass Portable Basketball ",,1099.99,http://images.acmesports.sports/Spalding+Beast+60%22+Glass+Portable+Basketball+Hoop
 ```
 
-###With takeOrdered:
+### With takeOrdered:
 (it will show duplicates as well)
 
 ```python
@@ -1240,9 +1240,9 @@ distinct()
 
 
 
-##SAVE RESULTS TO FILES
+## SAVE RESULTS TO FILES
 ----------------------
-###Saving as text files with delimiters - revenue per order id
+### Saving as text files with delimiters - revenue per order id
 ```python
 orderItems = sc.textFile("/public/retail_db/order_items")
 orderItemsMap = orderItems. \
@@ -1321,7 +1321,7 @@ Found 3 items
 ```
 
 
-##COMPRESSION
+## COMPRESSION
 Compression is used to reduce storage requirements in hadoop clusters ( this way the performance of the cluster will be better). TO know the supported compression types, we have to check a properties file in our cluster.
 ```python
 [carlos_sanchez@gw03 ~]$ cd /etc/hadoop/conf
@@ -1363,7 +1363,7 @@ To check whether the files have been saved succesfully in compressed format:
 If we want to print the contents of the files, we have to use a for loop.
 
 
-##SAVING THE FILE IN OTHER FORMATS
+## SAVING THE FILE IN OTHER FORMATS
 Supported file formats
 * orc
 * json
@@ -2220,7 +2220,7 @@ we have to use the resources optimally. Then we have to read orders and order_it
 
 
 
-##How to deploy a spark project
+## How to deploy a spark project
 
 We create the next data structure and we edit a file:
 ```python
@@ -2765,7 +2765,7 @@ To show the describe function of a certain function we do:
 
 To know how a function works: --> describe function [NAME_OF_THE_FUNCTION];
 
-###Important functions
+### Important functions
 ```python
 
     hive (default)> describe function substr;
@@ -2826,7 +2826,7 @@ To know how a function works: --> describe function [NAME_OF_THE_FUNCTION];
     OK
     you
 ```
-###  DATE MANIPULATION 
+### DATE MANIPULATION 
 
     + current_date
     + current_timestamp
@@ -3019,7 +3019,7 @@ We can use "if" or "case" to specify conditions:
 
 ```
 
-        ###NVL
+### NVL
         
         If a column is null then...
 ```python
@@ -3036,7 +3036,7 @@ We can use "if" or "case" to specify conditions:
         PENDING_PAYMENT
         PENDING_PAYMENT
 ```
-   ## ROW LEVEL TRANSFORMATIONS 
+## ROW LEVEL TRANSFORMATIONS 
 ```python
     hive (carlos_sanchez_retail_db_txt)> select concat(substr(order_date,1,4), substr(order_date, 6,2)) from orders limit 10;
     OK
@@ -3208,7 +3208,7 @@ In addition, we can write that query with a right outer join, where the parent t
 With full outer join we will consider data that is just in one table but not in the other one.
 
 
-   ### GROUP BY AND AGGREGATIONS 
+### GROUP BY AND AGGREGATIONS 
 ```python
 
     hive (carlos_sanchez_retail_db_txt)> select order_status, count(1) from orders group by order_status;
@@ -4496,7 +4496,7 @@ If we wanted to create the spark session ourselves:
 ```
 
 
-###Create dataframes from text files
+### Create dataframes from text files
 
 + We can use spark.read.csv or spark.read.text to read text data.
 + spark.read.csv can be used for comma separated data. Default field names will be in the form of _c0, _c1 etc
@@ -4772,7 +4772,7 @@ If lowerBound and upperBound is specified, it will generate strides  depending u
     + You can check the data in the output path mentioned
 
 
- ###DATAFRAME OPERATIONS
+### DATAFRAME OPERATIONS
 
 Let us see overview about Data Frame Operations. It is one of the 2 ways we can process Data Frames.
 
@@ -4783,7 +4783,7 @@ Let us see overview about Data Frame Operations. It is one of the 2 ways we can 
         + Sorting – sort or orderBy
         + Analytics Functions – aggregations, ranking and windowing functions
 
-###SPARK SQL
+### SPARK SQL
 ```python
     from pyspark.sql import functions
     help(functions) ---> It will display the list of the functions that are available
@@ -5644,7 +5644,7 @@ We can do it with sql stype syntax:
             only showing top 20 rows
 
 ```
-###  JOINING DATASETS
+### JOINING DATASETS
    
 Quite often we need to deal with multiple datasets which are related to each other.
 
@@ -6433,7 +6433,7 @@ As we have to group by date and by product_id, we have to create a composite gro
             only showing top 20 rows
 ```
 
-###  SORTING DATA
+### SORTING DATA
 We can sort the data coming from an aggregation:
 
 + sort or orderBy can be used to sort the data globally.
@@ -6564,16 +6564,11 @@ We can do the same in the following way:
                         only showing top 20 rows
 
 ```
-  +  By default, data will be sorted in ascending order.
-  +  We can change the order by using the orderBy using desc function.
-
-
-            - At times, we might not want to sort the data globally. Instead, we might want to sort the data within a group. In that case, we can use 
-              sortWithinPartitions (for example to sort the stores by revenue within each state):
-
-                    Example:
-
-                        Say we want to order the data by date and then, we want to order the data by order_customer_id
++ By default, data will be sorted in ascending order.
++ We can change the order by using the orderBy using desc function.
+  + At times, we might not want to sort the data globally. Instead, we might want to sort the data within a group. In that case, we can use sortWithinPartitions (for example to sort the stores by revenue within each state):
+  Example:
+  Say we want to order the data by date and then, we want to order the data by order_customer_id
 ```python
 
                             >>> orders.show()
@@ -8165,7 +8160,7 @@ rm01.itversity.com:19088
 
 
 
-###Cluster Metrics
+### Cluster Metrics
 We have to take a look to the columns of "VCores Total" and "Memory Total". It means that the number of cores defined in "VCores Total" handle the capacity shown in "MemoryTotal" field.
 
 The minimum allocation for any task will be given by the "Minimum allocation" column (one row below the others)  and "Maximum allocation".
