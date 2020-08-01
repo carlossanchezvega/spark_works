@@ -1,7 +1,7 @@
 Study guide for CCA175 Cloudera certification
 =============================================
 
-###Create a directory path
+### Create a directory path
 ---------------
 
 Create a directory path recursively
