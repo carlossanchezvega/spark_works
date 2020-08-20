@@ -1,4 +1,4 @@
-RDDs EXERCISED FOR CCA175 CLOUDERA PYSPARK DEVELOPER
+HIVE EXERCISES FOR CCA175 CLOUDERA PYSPARK DEVELOPER
 =============================================
 Taking into account this data model:
 
